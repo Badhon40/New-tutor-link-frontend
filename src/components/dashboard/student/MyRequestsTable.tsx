@@ -7,8 +7,6 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 
-
-
 export default function MyRequestsTable() {
   const currentUser = useSelector(selectCurrentUser);
 
