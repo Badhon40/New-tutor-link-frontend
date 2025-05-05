@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 import { verifyToken } from "@/lib/verifyToken";
@@ -10,7 +11,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"; // Importing the eye icons
-import { FaGithub, FaGoogle } from "react-icons/fa"; // Importing social media icons
+// Importing social media icons
 
 const LoginForm = () => {
  
@@ -54,6 +55,48 @@ const LoginForm = () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.error(err);
+    }
+  };
+
+  const handleDemoTeacherLogin = async () => {
+    const demoUser = {
+      email: "demo_teacher@gmail.com", // Replace with actual demo teacher email
+      password: "12345678", // Replace with actual password
+    };
+    try {
+      const res = await loginUser(demoUser);
+      if (res?.success) {
+        const user = verifyToken(res?.data?.accessToken) as TUser;
+        dispatch(setUser({ user: user, token: res?.data?.accessToken }));
+        toast.success("Logged in as Demo Teacher");
+        router.push('/dashboard/teacher'); // Redirect to teacher dashboard
+      } else {
+        toast.error(res?.message);
+      }
+    } catch (err: any) {
+      console.error(err);
+      toast.error("Something went wrong with Demo Teacher Login");
+    }
+  };
+  
+  const handleDemoStudentLogin = async () => {
+    const demoUser = {
+      email: "demo_student@gmail.com", // Replace with actual demo student email
+      password: "12345678", // Replace with actual password
+    };
+    try {
+      const res = await loginUser(demoUser);
+      if (res?.success) {
+        const user = verifyToken(res?.data?.accessToken) as TUser;
+        dispatch(setUser({ user: user, token: res?.data?.accessToken }));
+        toast.success("Logged in as Demo Student");
+        router.push('/dashboard/student'); // Redirect to student dashboard
+      } else {
+        toast.error(res?.message);
+      }
+    } catch (err: any) {
+      console.error(err);
+      toast.error("Something went wrong with Demo Student Login");
     }
   };
 
@@ -128,15 +171,13 @@ const LoginForm = () => {
           <p className="text-sm text-gray-600">Or login with</p>
 
           {/* GitHub Login */}
-          <button className="w-full flex items-center justify-center py-3 border border-gray-300 rounded-md bg-gray-100 text-black hover:bg-gray-200 transition duration-300">
-            <FaGithub size={20} className="mr-3" />
-            GitHub
+          <button onClick={()=>handleDemoTeacherLogin()} className="w-full flex items-center justify-center py-3 border border-gray-300 rounded-md bg-gray-100 text-black hover:bg-gray-200 transition duration-300">
+            Demo Teacher Login
           </button>
 
           {/* Google Login */}
-          <button className="w-full flex items-center justify-center py-3 border border-gray-300 rounded-md bg-gray-100 text-black hover:bg-gray-200 transition duration-300">
-            <FaGoogle size={20} className="mr-3" />
-            Google
+          <button onClick={handleDemoStudentLogin } className="w-full flex items-center justify-center py-3 border border-gray-300 rounded-md bg-gray-100 text-black hover:bg-gray-200 transition duration-300">
+            Demo Student Login
           </button>
 
           <p className=" flex items-center justify-center mt-6">
