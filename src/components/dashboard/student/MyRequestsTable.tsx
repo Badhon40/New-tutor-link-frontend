@@ -7,19 +7,27 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 
+// Helper to format date safely
+const formatDate = (value: string | undefined | null): string => {
+  if (!value) return "N/A";
+  const date = new Date(value);
+  return isNaN(date.getTime()) ? "N/A" : date.toISOString().split("T")[0];
+};
+
 export default function MyRequestsTable() {
   const currentUser = useSelector(selectCurrentUser);
   const [requests, setRequests] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchRequest = async () => {
+      if (!currentUser?.email) return;
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_API}/permits/get/${currentUser?.email}`,
+          `${process.env.NEXT_PUBLIC_BASE_API}/permits/get/${currentUser.email}`,
           { next: { revalidate: 5 } }
         );
         const data = await res.json();
-        setRequests(data?.data);
+        setRequests(data?.data || []);
       } catch (error) {
         console.error("Failed to fetch bookings:", error);
       }
@@ -29,10 +37,10 @@ export default function MyRequestsTable() {
   }, [currentUser?.email]);
 
   const makePayment = async (data: { [key: string]: any }) => {
-    const stripe = await loadStripe("pk_test_51NFeKsHXxHHqqBSEXEZ6oVqeAquqIpszGA5xvnGO3XSkrX53ffO3A2pRkRRuIhjoVvUKiFxBoC476BMmG8pr8GDK00kNXNphd6");
+    const stripe = await loadStripe("pk_test_51RL6aZPBoYcHumd6yk72rs5nrP1ukQeyFvDDZuFZBoTD3iWUsr2YRhDug3CFVDyBMbJ8CnejAlQ2LDiqVCkcRbJn00mcOtt9XR");
 
     const response = await fetch(
-      "https://tutor-link-backend-theta.vercel.app/create-checkout-session",
+      "https://tutor-link-backend-pi.vercel.app/create-checkout-session",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -74,10 +82,10 @@ export default function MyRequestsTable() {
                     className="w-8 h-8 rounded-full"
                   />
                 </td>
-                <td className="p-3">{d.tutorId?.name}</td>
+                <td className="p-3">{d.tutorId?.name || "N/A"}</td>
                 <td className="p-3">
-                  {new Date(d.tutorId?.availability?.from).toISOString().split("T")[0]} -{" "}
-                  {new Date(d.tutorId?.availability?.to).toISOString().split("T")[0]}
+                  {formatDate(d.tutorId?.availability?.from)} -{" "}
+                  {formatDate(d.tutorId?.availability?.to)}
                 </td>
                 <td className="p-3">
                   <span
@@ -125,16 +133,14 @@ export default function MyRequestsTable() {
                 className="w-10 h-10 rounded-full"
               />
               <div>
-                <p className="text-base font-semibold">{d.tutorId?.name}</p>
-                <p className="text-xs text-gray-600 dark:text-gray-300">
-                  #{i + 1}
-                </p>
+                <p className="text-base font-semibold">{d.tutorId?.name || "N/A"}</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300">#{i + 1}</p>
               </div>
             </div>
             <p className="text-sm">
               <strong>Availability:</strong>{" "}
-              {new Date(d.tutorId?.availability?.from).toISOString().split("T")[0]} -{" "}
-              {new Date(d.tutorId?.availability?.to).toISOString().split("T")[0]}
+              {formatDate(d.tutorId?.availability?.from)} -{" "}
+              {formatDate(d.tutorId?.availability?.to)}
             </p>
             <p className="text-sm mt-1">
               <strong>Accepted:</strong>{" "}

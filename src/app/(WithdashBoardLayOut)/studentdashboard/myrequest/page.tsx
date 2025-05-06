@@ -1,3 +1,4 @@
+"use client";
 import MyRequestsTable from "@/components/dashboard/student/MyRequestsTable";
 import React from "react";
 
