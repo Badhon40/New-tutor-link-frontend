@@ -16,7 +16,7 @@ const Success = () => {
       orderPlacedRef.current = true;
 
       fetch(
-        `https://tutor-link-backend-swart.vercel.app/checkout-session/${sessionId}`
+        `https://tutor-link-backend-pi.vercel.app/checkout-session/${sessionId}`
       )
         .then((res) => res.json())
         .then((data) => {

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/no-unescaped-entities */
+
 "use client";
 import { verifyToken } from "@/lib/verifyToken";
 import { setUser, TUser } from "@/Redux/Features/Auth/authSlice";
@@ -52,7 +53,7 @@ const LoginForm = () => {
       } else {
         toast.error(res?.message);
       }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     } catch (err: any) {
       console.error(err);
     }
@@ -69,7 +70,7 @@ const LoginForm = () => {
         const user = verifyToken(res?.data?.accessToken) as TUser;
         dispatch(setUser({ user: user, token: res?.data?.accessToken }));
         toast.success("Logged in as Demo Teacher");
-        router.push('/dashboard/teacher'); // Redirect to teacher dashboard
+        router.push('/'); // Redirect to teacher dashboard
       } else {
         toast.error(res?.message);
       }
@@ -90,7 +91,7 @@ const LoginForm = () => {
         const user = verifyToken(res?.data?.accessToken) as TUser;
         dispatch(setUser({ user: user, token: res?.data?.accessToken }));
         toast.success("Logged in as Demo Student");
-        router.push('/dashboard/student'); // Redirect to student dashboard
+        router.push('/'); // Redirect to student dashboard
       } else {
         toast.error(res?.message);
       }

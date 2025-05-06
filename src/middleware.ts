@@ -40,8 +40,7 @@ export const middleware = async (request: NextRequest) => {
 
 export const config = {
   matcher: [
-    "/tutors",
-    "/tutors/:path*",
+    
     "/studentdashboard",
     "/studentdashboard/:path*",
     "/tutor",

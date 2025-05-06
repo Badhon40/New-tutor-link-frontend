@@ -49,7 +49,7 @@ export default function MyRequestsTable() {
     };
 
     const response = await fetch(
-      "http://localhost:5000/create-checkout-session",
+      "https://tutor-link-backend-pi.vercel.app/create-checkout-session",
       {
         method: "POST",
         headers: headers,

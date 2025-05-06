@@ -6,27 +6,32 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { IUser } from "@/types/user";
 
+
 const TutorSection = ({ tutors }: { tutors: IUser[] }) => {
-  // const tutors = [
-  //     {
-  //       name: 'Emily Johnson',
-  //       subject: 'Mathematics',
-  //       image: '/tutors/emily.jpg',
-  //       bio: 'Passionate math tutor with 5+ years of experience helping students excel.',
-  //     },
-  //     {
-  //       name: 'Daniel Kim',
-  //       subject: 'Physics',
-  //       image: '/tutors/daniel.jpg',
-  //       bio: 'Physics enthusiast making complex concepts simple and fun.',
-  //     },
-  //     {
-  //       name: 'Sophia Lee',
-  //       subject: 'English Literature',
-  //       image: '/tutors/sophia.jpg',
-  //       bio: 'Experienced English tutor helping students master writing & analysis.',
-  //     },
-  //   ]
+
+ 
+
+
+
+  if (!tutors || tutors.length === 0) {
+    return (
+      <section className="py-6 my-6 max-w-7xl mx-auto px-4 transition-colors duration-300">
+        <div className="text-center mb-12">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl md:text-4xl font-bold text-blue-700 dark:text-white"
+          >
+            Meet Our Top Tutors 👩‍🏫👨‍🏫
+          </motion.h2>
+        </div>
+        <p className="text-center text-gray-500">No tutors available at the moment.</p>
+      </section>
+    );
+  }
+  
+
 
   return (
     <section className="py-6 my-6 max-w-7xl mx-auto px-4 transition-colors duration-300">

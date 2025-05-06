@@ -193,11 +193,6 @@ const NavBar = () => {
                 {link.label}
               </Link>
             ))}
-            <Link href="/login" onClick={() => setIsOpen(false)}>
-              <Button className="transition-transform hover:scale-105 duration-300">
-                Login
-              </Button>
-            </Link>
           </div>
         </div>
       )}
