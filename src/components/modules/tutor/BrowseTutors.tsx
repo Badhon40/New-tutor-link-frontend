@@ -19,7 +19,6 @@ const BrowseTutors = ({ tutors }: { tutors: IUser[] }) => {
   const [priceSort, setPriceSort] = useState("");
  
 
-  // console.log("tutors", tutors);
 
   useEffect(() => {
     const initialSearchTerm = decodeURIComponent(
@@ -121,7 +120,7 @@ const BrowseTutors = ({ tutors }: { tutors: IUser[] }) => {
                   />
                 </CollapsibleContent>
               </Collapsible>
-                {/* sort by suj */}
+                {/* sort by sub */}
               <Collapsible defaultOpen className=" my-4">
                 <CollapsibleTrigger asChild>
                   <button className="group flex text-base items-center justify-between w-full text-left font-medium ">

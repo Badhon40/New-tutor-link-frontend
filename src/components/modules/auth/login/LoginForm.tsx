@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/no-unescaped-entities */
-
 "use client";
 import { verifyToken } from "@/lib/verifyToken";
 import { setUser, TUser } from "@/Redux/Features/Auth/authSlice";
@@ -12,12 +10,13 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"; // Importing the eye icons
-// Importing social media icons
+import { GiTeacher } from "react-icons/gi";
+import { PiStudentBold } from "react-icons/pi";
+import { Button } from "@/components/ui/button";
 
 const LoginForm = () => {
- 
   const searchParams = useSearchParams();
-  const redirect = searchParams.get('redirectPath');
+  const redirect = searchParams.get("redirectPath");
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({
@@ -35,12 +34,15 @@ const LoginForm = () => {
     setShowPassword((prev) => !prev); // Toggle password visibility
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // demo login
+  const demoLogin = async (role: "Tutor" | "Student") => {
+    const demoCredentials = {
+      Tutor: { email: "demo_teacher@gmail.com", password: "12345678" },
+      Student: { email: "demo_student@gmail.com", password: "12345678" },
+    };
+    const data = demoCredentials[role];
     try {
-      const res = await loginUser(formData);
-      // console.log(res.data.accessToken);
-      
+      const res = await loginUser(data);
       if (res?.success) {
         const user = verifyToken(res?.data?.accessToken) as TUser;
         dispatch(setUser({ user: user, token: res?.data?.accessToken }));
@@ -48,56 +50,38 @@ const LoginForm = () => {
         if (redirect) {
           router.push(redirect);
         } else {
-          router.push('/');
+          router.push("/");
         }
       } else {
         toast.error(res?.message);
       }
-     
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.error(err);
     }
   };
 
-  const handleDemoTeacherLogin = async () => {
-    const demoUser = {
-      email: "demo_teacher@gmail.com", // Replace with actual demo teacher email
-      password: "12345678", // Replace with actual password
-    };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     try {
-      const res = await loginUser(demoUser);
+      const res = await loginUser(formData);
+      // console.log(res.data.accessToken);
+
       if (res?.success) {
         const user = verifyToken(res?.data?.accessToken) as TUser;
         dispatch(setUser({ user: user, token: res?.data?.accessToken }));
-        toast.success("Logged in as Demo Teacher");
-        router.push('/'); // Redirect to teacher dashboard
+        toast.success(res?.message);
+        if (redirect) {
+          router.push(redirect);
+        } else {
+          router.push("/");
+        }
       } else {
         toast.error(res?.message);
       }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.error(err);
-      toast.error("Something went wrong with Demo Teacher Login");
-    }
-  };
-  
-  const handleDemoStudentLogin = async () => {
-    const demoUser = {
-      email: "demo_student@gmail.com", // Replace with actual demo student email
-      password: "12345678", // Replace with actual password
-    };
-    try {
-      const res = await loginUser(demoUser);
-      if (res?.success) {
-        const user = verifyToken(res?.data?.accessToken) as TUser;
-        dispatch(setUser({ user: user, token: res?.data?.accessToken }));
-        toast.success("Logged in as Demo Student");
-        router.push('/'); // Redirect to student dashboard
-      } else {
-        toast.error(res?.message);
-      }
-    } catch (err: any) {
-      console.error(err);
-      toast.error("Something went wrong with Demo Student Login");
     }
   };
 
@@ -126,8 +110,8 @@ const LoginForm = () => {
           {/* Password Input */}
           <div className="relative">
             <label className="text-md font-semibold">Password</label>
-          
-           <input
+
+            <input
               type={showPassword ? "text" : "password"} // Toggle input type based on state
               name="password"
               placeholder="Password"
@@ -146,13 +130,12 @@ const LoginForm = () => {
                 <AiFillEye size={24} color="#6B7280" />
               )}
             </div>
-           
           </div>
 
           {/* Login Button */}
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out"
+            className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out cursor-pointer"
           >
             Login
           </button>
@@ -169,17 +152,32 @@ const LoginForm = () => {
           </p>
         </form>
         <div className="text-center mt-6 space-y-4">
-          <p className="text-sm text-gray-600">Or login with</p>
-
+        <div className="flex items-center justify-center my-4">
+        <div className="flex-grow h-px bg-gray-400"></div>
+        <span className="px-4 text-black dark:text-gray-300 text-sm font-medium tracking-wide">
+          QUICK DEMO ACCESS
+        </span>
+        <div className="flex-grow h-px bg-gray-400"></div>
+      </div>
           {/* GitHub Login */}
-          <button onClick={()=>handleDemoTeacherLogin()} className="w-full flex items-center justify-center py-3 border border-gray-300 rounded-md bg-gray-100 text-black hover:bg-gray-200 transition duration-300">
-            Demo Teacher Login
-          </button>
-
-          {/* Google Login */}
-          <button onClick={handleDemoStudentLogin } className="w-full flex items-center justify-center py-3 border border-gray-300 rounded-md bg-gray-100 text-black hover:bg-gray-200 transition duration-300">
-            Demo Student Login
-          </button>
+          <div className="mt-4 space-x-4 flex flex-col gap-4 ">
+            <Button
+              variant="outline"
+              className="w-full bg-blue-600 dark:bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out cursor-pointer"
+              onClick={() => demoLogin("Tutor")}
+            >
+              {" "}
+              <GiTeacher size={"2rem"} />
+              Demo Login as Tutor
+            </Button>
+            <Button
+              variant="outline"
+              className="w-full bg-blue-600 dark:bg-blue-600  text-white py-3 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out cursor-pointer"
+              onClick={() => demoLogin("Student")}
+            >
+              <PiStudentBold size={"2rem"} /> Demo Login as Student
+            </Button>
+          </div>
 
           <p className=" flex items-center justify-center mt-6">
             <Link

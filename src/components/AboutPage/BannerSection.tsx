@@ -5,11 +5,11 @@ import Link from 'next/link';
 
 const BannerSection = () => {
   return (
-    <section className="mt-[80px] px-6 py-12">
+    <section className="mt-[80px] px-6 ">
       {/* Banner Content */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         {/* Text Section */}
-        <div>
+        <div className='space-y-12'>
           <h1 className="text-4xl md:text-5xl font-bold text-blue-800 dark:text-white mb-4">
             Find the Right Tutor for You 🎯
           </h1>

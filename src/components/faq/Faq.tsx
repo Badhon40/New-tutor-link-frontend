@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 
 const faqData = [
   {
@@ -57,7 +58,7 @@ const FAQ = () => {
   };
 
   const toggleAnswer = (index: number) => {
-    setActiveIndex(activeIndex === index ? null : index);
+    setActiveIndex(prev => (prev === index ? null : index));
   };
 
   const filteredFAQ = faqData.filter(faq =>
@@ -65,43 +66,59 @@ const FAQ = () => {
   );
 
   return (
-    <div className="min-h-screen max-w-7xl mx-auto py-10 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 dark:from-gray-900 dark:to-gray-950 px-4 py-16">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl  md:text-4xl font-bold text-center text-blue-600 dark:text-white  mb-8">Frequently Asked Questions</h2>
+        <h2 className="text-center text-4xl font-extrabold text-blue-700 dark:text-white mb-12">
+          Frequently Asked Questions
+        </h2>
 
-        {/* Search Box */}
-        <div className="mb-8 flex justify-center">
+        {/* Search */}
+        <div className="mb-10 flex justify-center">
           <input
             type="text"
-            placeholder="Search FAQs"
+            placeholder="Search by keyword..."
             value={searchTerm}
             onChange={handleSearchChange}
-            className="w-3/4 sm:w-1/2 px-6 py-3 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-600 dark:bg-gray-800 dark:border-gray-600 dark:text-white transition-all"
+            className="w-full sm:w-3/4 md:w-2/3 px-5 py-3 rounded-xl border border-gray-300 dark:border-gray-700 shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white transition-all"
+            autoFocus
           />
         </div>
 
-        {/* FAQ Items */}
-        <div className="space-y-6">
-          {filteredFAQ.map((faq, index) => (
-            <div
-              key={index}
-              className="border-b pb-6 dark:border-gray-700 transition-all duration-300"
-            >
-              <div
-                onClick={() => toggleAnswer(index)}
-                className="cursor-pointer flex justify-between items-center text-lg font-semibold  dark:text-gray-100 text-blue-600 transition-all"
-              >
-                <span>{faq.question}</span>
-                <span className="text-xl">{activeIndex === index ? '-' : '+'}</span>
-              </div>
+        {/* FAQ List */}
+        <div className="space-y-4">
+          {filteredFAQ.length > 0 ? (
+            filteredFAQ.map((faq, index) => {
+              const isActive = activeIndex === index;
+              return (
+                <div
+                  key={index}
+                  className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow transition-all"
+                >
+                  <button
+                    onClick={() => toggleAnswer(index)}
+                    className="w-full flex justify-between items-center px-6 py-5 text-left text-lg font-medium text-blue-700 dark:text-white hover:bg-blue-50 dark:hover:bg-gray-700 transition"
+                  >
+                    <span>{faq.question}</span>
+                    <ChevronDown
+                      className={`w-5 h-5 transform transition-transform duration-300 ${isActive ? 'rotate-180' : ''}`}
+                    />
+                  </button>
 
-              {activeIndex === index && (
-                <div className="mt-4 text-gray-700 dark:text-gray-300">
-                  {faq.answer}
+                  <div
+                    className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${
+                      isActive ? 'max-h-[500px] py-4' : 'max-h-0 py-0'
+                    }`}
+                  >
+                    <p className="text-gray-700 dark:text-gray-300">{faq.answer}</p>
+                  </div>
                 </div>
-              )}
-            </div>
-          ))}
+              );
+            })
+          ) : (
+            <p className="text-center text-gray-600 dark:text-gray-400">
+              No matching FAQs found.
+            </p>
+          )}
         </div>
       </div>
     </div>

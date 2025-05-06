@@ -1,22 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import ReduxProvider from "@/Redux/provider";
-
 import { ThemeProvider } from "next-themes";
 import DarkModeToggle from "@/components/darkMood/DarkMoodToggle";
-
 import Providers from "@/providers/Providers";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Font setup
+const poppins = Poppins({
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-poppins",
 });
 
 export const metadata: Metadata = {
@@ -24,7 +19,7 @@ export const metadata: Metadata = {
   description: "Providing a platform for tutors and students to connect",
   icons: {
     icon: "https://i.ibb.co.com/FqcCMRkT/logo.png",
-    },
+  },
 };
 
 export default function RootLayout({
@@ -33,23 +28,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={poppins.variable}>
       <body
-        className={`${geistSans.className} ${geistMono.className} antialiased  transition-colors duration-300 dark:bg-gray-900 `}
+        className={`font-sans antialiased transition-colors duration-300 dark:bg-gray-900`}
       >
         <Toaster position="top-right" />
         <Providers>
           <ReduxProvider>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
               {children}
               <DarkModeToggle />
             </ThemeProvider>
           </ReduxProvider>
         </Providers>
-        {/* <Toaster position="top-right" />
-        <Providers>
-          <ReduxProvider>{children}</ReduxProvider>
-        </Providers> */}
       </body>
     </html>
   );

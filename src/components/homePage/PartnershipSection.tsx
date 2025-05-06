@@ -9,6 +9,7 @@ const partners = [
   { name: 'EdX', logo: 'https://i.ibb.co.com/LXtGHyjH/channels4-profile.jpg' },
   { name: 'Udemy', logo: 'https://i.ibb.co.com/sTxdpTq/gametiles-com-udemy-android.jpg' },
   { name: 'UNESCO', logo: 'https://i.ibb.co.com/HLjD0kRD/Design-sans-titre-1.png' },
+  { name: 'Skillshare', logo: 'https://cdn.dribbble.com/userupload/25833512/file/original-3b44523cf54940c951d9d284347e1136.png' }, // New Partner
 ];
 
 const Partnerships = () => {
@@ -20,16 +21,16 @@ const Partnerships = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold text-blue-700  dark:text-white mb-6"
+          className="text-3xl md:text-4xl font-bold text-blue-700 dark:text-white mb-6"
         >
           🤝 Our Trusted Partners
         </motion.h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto">
+        <p className="text-gray-700 dark:text-gray-300 mb-10 max-w-2xl mx-auto">
           We’re proud to collaborate with leading organizations in education and technology to ensure
           every student and tutor gets the best tools and support.
         </p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 items-center justify-center">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 items-center justify-center">
           {partners.map((partner, index) => (
             <motion.div
               key={index}

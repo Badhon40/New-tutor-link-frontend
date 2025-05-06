@@ -31,8 +31,9 @@ const NavBar = () => {
     { label: "Home", href: "/" },
     { label: "Tutors", href: "/tutors" },
     { label: "About Us", href: "/about" },
-    { label: "Contact", href: "/contact" },
     { label: "Blogs", href: "/blogs" },
+    { label: "Contact", href: "/contact" },
+
     { label: "FAQ", href: "/faq" },
   ];
 
@@ -68,11 +69,11 @@ const NavBar = () => {
 
   return (
     <nav
-      className={`fixed top-0 z-50 w-full transition-all duration-300 overflow-x-hidden shadow-sm shadow-blue-600 ${
+      className={`fixed top-0 z-50 w-full transition-all duration-300 overflow-x-hidden shadow-sm  shadow-blue-600 ${
         scrolled ? "bg-blue-100 shadow-md text-black" : "bg-gray-100 text-black"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex justify-between items-center overflow-x-hidden">
+      <div className="max-w-7xl mx-auto  sm:px-6 py-6 flex justify-between items-center overflow-x-hidden">
         <div className="flex items-center gap-2">
           <button
             className="md:hidden text-sm px-2"
@@ -117,7 +118,7 @@ const NavBar = () => {
                     alt={""}
                     width={40}
                     height={40}
-                    className="text-blue-600"
+                    className="text-blue-600 cursor-pointer"
                   />
                   {/* <AvatarFallback>User</AvatarFallback> */}
                 </Avatar>
@@ -193,6 +194,11 @@ const NavBar = () => {
                 {link.label}
               </Link>
             ))}
+            <Link href="/login" onClick={() => setIsOpen(false)}>
+              <Button className="transition-transform hover:scale-105 duration-300">
+                Login
+              </Button>
+            </Link>
           </div>
         </div>
       )}

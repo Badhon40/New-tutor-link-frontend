@@ -41,6 +41,7 @@ export const middleware = async (request: NextRequest) => {
 export const config = {
   matcher: [
     
+    "/tutors/:path*",
     "/studentdashboard",
     "/studentdashboard/:path*",
     "/tutor",

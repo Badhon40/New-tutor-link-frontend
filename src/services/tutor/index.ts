@@ -1,17 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use server";
+"use server"; 
 
 export const getAllTutors = async () => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/users/tutors`,
       {
-        next: {
-          tags: ["TUTORS"],
-        },
+        next: { revalidate: 30 },
       }
     );
-    // console.log(res, "res");
+
     if (!res.ok) {
       throw new Error("Failed to fetch data");
     }
@@ -26,9 +24,7 @@ export const getSingleTutor = async (tutorId:string) => {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/users/tutors/${tutorId}`,
       {
-        next: {
-          tags: ["TUTORS"],
-        },
+        next: { revalidate: 30 },
       }
     );
     if (!res.ok) {

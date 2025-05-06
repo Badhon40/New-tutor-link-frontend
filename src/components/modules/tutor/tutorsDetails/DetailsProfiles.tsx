@@ -37,8 +37,10 @@ import { IUser } from "@/types/user";
 import { sendTutorPermit } from "@/services/sendTutorPermits";
 import { getReviews, postReview } from "@/services/review";
 import StarRating from "@/components/shared/starRating";
-import { useUser } from "@/context/UserContext";
+
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "@/Redux/Features/Auth/authSlice";
 
 export interface IReview {
   tutorId: string;
@@ -53,7 +55,7 @@ const DetailsProfiles = ({ tutor }: { tutor: IUser | null }) => {
   const [reviewText, setReviewText] = useState("");
   const [reviewerName, setreviewerName] = useState("");
   const [reviews, setReviews] = useState([]);
-  const user = useUser();
+  const user = useSelector(selectCurrentUser);
   const router = useRouter();
   const [requestStatus, setRequestStatus] = useState<string | null>(null);
 
@@ -76,8 +78,8 @@ const DetailsProfiles = ({ tutor }: { tutor: IUser | null }) => {
   }
   // open dialog
   const handleOpenDialog = async () => {
-    if (!user?.user?.email) {
-      console.log("user not found", user?.user?.email);
+    if (!user?.email) {
+      console.log("user not found", user?.email);
       toast.error("Log in First");
       router.push("/login");
       return;
@@ -111,15 +113,20 @@ const DetailsProfiles = ({ tutor }: { tutor: IUser | null }) => {
   //  send request section
   const handleRequest = async () => {
     try {
-      if (!user?.user?.email) {
-        toast.error("User Information is not available.");
+      if (!user?.email) {
+        toast.error("User is not available.");
+        router.push("/login");
+        return;
+      }
+      if (user?.role == 'Tutor') {
+        toast.error("Please login as a Student.");
         router.push("/login");
         return;
       }
 
       setRequestStatus("pending");
 
-      const response = await sendTutorPermit(tutor?._id, user.user.email, tutor?.price ?? 0);
+      const response = await sendTutorPermit(tutor?._id, user?.email, tutor?.price ?? 0);
       console.log(response, "response");
 
       if (response.success) {
@@ -287,11 +294,11 @@ const DetailsProfiles = ({ tutor }: { tutor: IUser | null }) => {
 
           </Tabs>
           <div className="text-end flex justify-center mt-6 items-center gap-3">
-            <Button
+            <Button 
               variant="outline"
               className="bg-blue-600 text-lg text-white w-1/2  hover:text-blue-600 border-blue-600 flex items-center gap-2 "
               onClick={handleRequest}
-              disabled={requestStatus === "pending"}
+              disabled={requestStatus === "pending"} 
             >
               <BookDown size={30} />
               {requestStatus === "pending" ? "Booking Pending..." : "Book Now"}

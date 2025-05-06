@@ -26,6 +26,7 @@ export const registerUser = async (userData: FieldValues) => {
 };
 
 export const loginUser = async (userData: FieldValues) => {
+  console.log('from auth',userData)
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/auth/login`, {
       method: "POST",
@@ -59,7 +60,21 @@ export const getCurrentUser = async () => {
     return null;
   }
 };
+export const getAllUsers = async () => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/users`, {
+      method: "GET",
+      cache:'no-store'
+    });
 
+    const result = await res.json();
+
+    return result;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    return Error(error);
+  }
+};
 export const logout = async () => {
   (await cookies()).delete("accessToken");
 };

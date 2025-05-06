@@ -2,25 +2,24 @@
 
 import { MapPin, ScanEye } from "lucide-react";
 import React from "react";
-import img from "../../../../public/tutor.jpg";
-
 import Link from "next/link";
 import { IUser } from "@/types/user";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import tutorProfile from '../../../../public/tuturProfile.jpg'
 
 const TutorsCard = ({ tutor }: { tutor: IUser }) => {
   return (
     <div className="bg-gray-100 dark:bg-gray-700 relative overflow-hidden hover:shadow-lg  group rounded-xl p-5 transition-all duration-500 transform mb-6">
-      <div className=" flex flex-col lg:flex-row justify-between gap-6 ">
+      <div className=" flex flex-col lg:flex-row items-center justify-between  gap-6 ">
 
         <div className=" lg:w-1/4">
           <Image
-            src={tutor?.profilePicture || img}
+            src={tutor?.profilePicture || tutorProfile}
             alt={tutor?.name || "Tutor"}
             height={400}
             width={400}
-            className="rounded object-cover border-2 border-gray-300 dark:border-gray-600"
+            className="rounded  object-cover border-2 border-gray-300 dark:border-gray-600"
           />
       
         </div>
