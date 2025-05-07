@@ -17,9 +17,6 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "TutorLink",
   description: "Providing a platform for tutors and students to connect",
-  icons: {
-    icon: "https://i.ibb.co.com/FqcCMRkT/logo.png",
-  },
 };
 
 export default function RootLayout({

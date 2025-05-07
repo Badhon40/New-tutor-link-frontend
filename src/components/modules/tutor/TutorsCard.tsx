@@ -6,79 +6,71 @@ import Link from "next/link";
 import { IUser } from "@/types/user";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import tutorProfile from '../../../../public/tuturProfile.jpg'
+import tutorProfile from '../../../../public/tuturProfile.jpg';
 
 const TutorsCard = ({ tutor }: { tutor: IUser }) => {
   return (
-    <div className="bg-gray-100 dark:bg-gray-700 relative overflow-hidden hover:shadow-lg  group rounded-xl p-5 transition-all duration-500 transform mb-6">
-      <div className=" flex flex-col lg:flex-row items-center justify-between  gap-6 ">
-
-        <div className=" lg:w-1/4">
+    <div className="bg-white dark:bg-gray-800 relative overflow-hidden shadow-md group rounded-xl p-6 transition-all duration-300 hover:shadow-lg mb-6">
+      <div className="flex flex-col lg:flex-row items-center gap-6">
+        
+        <div className="lg:w-1/4 relative">
           <Image
             src={tutor?.profilePicture || tutorProfile}
             alt={tutor?.name || "Tutor"}
             height={400}
             width={400}
-            className="rounded  object-cover border-2 border-gray-300 dark:border-gray-600"
+            className="rounded-xl object-cover border-2 border-gray-200 dark:border-gray-700 group-hover:scale-105 transition-transform duration-300"
           />
-      
         </div>
 
-        <div className="lg:w-2/4">
-          <h1 className="text-gray-600 text-xl uppercase dark:text-gray-200 font-bold">
-            {tutor?.name}
-          </h1>
-          <div className="flex items-center text-black gap-2 text-sm">
-            <MapPin size={15} color="#f72b2b" />{" "}
-            {tutor?.address ? tutor.address.split(",").pop()?.trim() : "N/A"}
+        <div className="lg:w-2/4 space-y-3">
+          <div className="flex items-center justify-between">
+            <h1 className="text-gray-800 text-2xl uppercase dark:text-white font-semibold">
+              {tutor?.name}
+            </h1>
+            <div className="flex items-center text-gray-500 gap-2 text-sm">
+              <MapPin size={18} color="#f72b2b" />
+              {tutor?.address ? tutor.address.split(",").pop()?.trim() : "N/A"}
+            </div>
           </div>
 
-          <p className="text-gray-500 text-sm mt-2 dark:text-gray-300">
-            Hi!! I am <span className="font-bold">{tutor?.name}</span> I have
-            many years of experience tutoring{" "}
+          <p className="text-gray-600 dark:text-gray-400">
+            Hi! I am <span className="font-bold">{tutor?.name}</span>. I have extensive experience tutoring 
+            <span className="font-bold">
+              {" "}
+              {tutor?.subjects
+                ?.split(",")
+                .map((subject) => subject.trim())
+                .join(", ")}
+            </span>, and I’m passionate about helping students understand challenging concepts with clarity and confidence.
+          </p>
+
+          <div className="flex flex-wrap gap-2 mt-2">
             {tutor?.subjects?.split(",").map((subject, index) => (
-              <span key={index} className="font-bold">
-                {index > 0 ? " and " : ""}{subject}
+              <span
+                key={index}
+                className="rounded-full bg-blue-100 px-4 py-1 text-sm font-medium text-blue-700"
+              >
+                {subject.trim()}
               </span>
             ))}
-            , a subject I’m truly passionate about. My strong foundation in
-            subjects, combined with my near-completed Master’s degree in M.S.C,
-            equips me to effectively guide students through challenging concepts
-            with clarity and confidence.
-          </p>
+          </div>
         </div>
 
-        <div className="lg:w-1/4 space-y-2 flex flex-col justify-center items-center text-center">
-          <p>
-            {" "}
-            <span className="text-sm font-bold">
-              ⭐⭐⭐⭐⭐ {tutor?.averageRating?.toFixed(1)}
-            </span>
+        <div className="lg:w-1/4 text-center space-y-3">
+          <p className="text-lg font-bold text-gray-800 dark:text-white">
+            ⭐⭐⭐⭐⭐ {tutor?.averageRating?.toFixed(1)}
           </p>
-          {tutor?.subjects?.split(",").map((subject, index) => (
-            <span
-              key={index}
-              className="rounded-full bg-[#dae6f3] px-5 py-1 text-sm font-semibold text-[#066ccb]"
+          <p className="text-gray-500 dark:text-gray-400">${tutor?.price}/hr</p>
+          <Link href={`/tutors/${tutor?._id}`}>
+            <Button
+              variant="outline"
+              className="bg-blue-600 text-white dark:bg-blue-500 dark:text-white hover:bg-blue-700 transition-all duration-300"
             >
-              {subject.trim()}
-            </span>
-          ))}
-          <p>${tutor?.price}/hr</p>
-          <div
-            className=" group-hover:bottom-1 -bottom-16 transition-all duration-500 bg-gray-600 dark:bg-gray-100 mt-3 right-35
-         rounded-lg"
-          >
-            <Link href={`/tutors/${tutor?._id}`}>
-              {" "}
-              <Button
-                variant="outline"
-               className="bg-blue-600 text-base dark:bg-blue-500 text-white  hover:text-blue-600 border-blue-600 flex items-center gap-2 "
-              >
-                <ScanEye />
-                Veiw Profile
-              </Button>
-            </Link>
-          </div>
+              <ScanEye />
+              View Profile
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
