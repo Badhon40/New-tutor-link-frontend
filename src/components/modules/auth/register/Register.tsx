@@ -300,8 +300,6 @@ const RegisterForm = () => {
                   )}
                 />
               </div>
-
-              <div className="md:flex flex-wrap justify-between ">
                 <FormField
                   // control={form.control}
                   name="password"
@@ -347,7 +345,6 @@ const RegisterForm = () => {
                     </FormItem>
                   )}
                 />
-              </div>
 
               <Button
                 type="submit"
@@ -436,7 +433,6 @@ const RegisterForm = () => {
                 />
               </div>
 
-              <div className=" flex flex-wrap justify-between ">
                 <FormField
                   control={form.control}
                   name="password"
@@ -482,7 +478,7 @@ const RegisterForm = () => {
                     </FormItem>
                   )}
                 />
-              </div>
+              
 
               <Button
                 type="submit"
