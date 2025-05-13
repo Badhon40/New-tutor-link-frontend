@@ -68,7 +68,7 @@ const BrowseTutors = ({ tutors }: { tutors: IUser[] }) => {
   );
 
   return (
-    <div className="mx-auto max-w-7xl py-10 md:py-20">
+    <div className="mx-auto max-w-7xl py-10 md:py-20 h-full">
       {/* Sheet Trigger for Mobile/Tablet */}
       <div className="xl:hidden mb-8 text-center ">
         <Sheet>
@@ -81,7 +81,7 @@ const BrowseTutors = ({ tutors }: { tutors: IUser[] }) => {
 
           <SheetContent
             side="top"
-            className="w-[300px] sm:w-[400px]  py-8  px-6 overflow-y-scroll  "
+            className="w-[300px] h-[100vh] sm:w-[400px]  py-8  px-6 overflow-y-scroll  "
           >
             <SheetTitle className="text-lg font-semibold mb-4"></SheetTitle>
             <div className=" flex justify-between items-center">

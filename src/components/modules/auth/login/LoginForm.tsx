@@ -86,8 +86,8 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r  flex items-center justify-center px-4 py-5">
-      <div className="md:w-[450px] w-[350px] shadow-[0px_0px_20px_theme(colors.blue.600)]  overflow-hidden rounded-lg border border-[#066ccb] py-6 px-8 bg-gray-100 dark:border-zinc-700 dark:bg-zinc-900">
+    <div className="min-h-screen bg-gradient-to-r  flex items-center justify-center px-4 py-3">
+      <div className="md:w-[450px] w-[350px] shadow-[0px_0px_20px_theme(colors.blue.600)]  overflow-hidden rounded-lg border border-[#066ccb] py-4 px-8 bg-gray-100 dark:border-zinc-700 dark:bg-zinc-900">
         <h2 className="text-3xl font-extrabold text-blue-800 text-center py-5 border-b">
           Login Now
         </h2>

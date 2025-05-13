@@ -2,6 +2,8 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import banner2 from '../../app/assets/banner2.jpg'; // Adjust the path as necessary
+
 
 const BannerSection = () => {
   return (
@@ -26,7 +28,7 @@ const BannerSection = () => {
         {/* Image Section */}
         <div className="relative w-full h-[350px] md:h-[550px] hover:shadow-blue-600 hover:scale-105 transition-transform duration-300 ease-in-out rounded-xl overflow-hidden">
           <Image
-            src="https://i.ibb.co.com/2Yf91FR6/banner2-removebg-preview.png" // place your image in the public folder
+            src={banner2} // place your image in the public folder
             alt="Banner"
             fill
             className="object-cover rounded-xl shadow-xl"

@@ -153,7 +153,7 @@ const DetailsProfiles = ({ tutor }: { tutor: IUser | null }) => {
       </div>
 
       {/* profile section */}
-      <div className="  p-4 border border-black shadow-[0px_0px_15px_rgba(37,99,235,0.6)] rounded-lg  justify-center items-center gap-12">
+      <div className="  p-4 border border-black rounded-lg  justify-center items-center gap-12">
         <div className="w-full mx-auto max-w-sm rounded-xl shadow-lg">
           <CardContent className="flex flex-col items-center pb-5 ">
             {/* Profile Picture and Verified Badge */}
@@ -212,7 +212,7 @@ const DetailsProfiles = ({ tutor }: { tutor: IUser | null }) => {
             {new Date(tutor?.availability?.to || "").toLocaleDateString()}
           </div>
         </div>
-        <div className=" mt-4">
+        <div className=" mt-4 w-[80%] mx-auto">
           <Tabs defaultValue="about" className="w-full">
             {/* <TabsList className="grid w-full grid-cols-3 bg-blue-400 text-gray-100">
               <TabsTrigger value="about" className="text-gray-100 flex gap-2">

@@ -1,9 +1,23 @@
 import LoginForm from "./../../components/modules/auth/login/LoginForm"
+import login from "../assets/login.png"
+import Image from "next/image";
 
 const LoginPage = () => {
   return (
-    <div className='min-h-screen flex justify-center items-center bg-gray-50 dark:bg-gray-900'>
-     <LoginForm></LoginForm>
+    <div className='min-h-screen w-full items-center bg-gray-200 dark:bg-gray-900 m'>
+      <div className="mx-auto flex flex-col md:flex-row items-center">
+       <div className="md:w-[50%] min-h-screen flex justify-center items-center">
+         <Image src={login}
+      height={600}
+      width={600}
+      alt="Login Image"
+      />
+       </div>
+      <div className="bg-blue-400 min-h-screen w-full py-6 md:py-0 md:w-[50%] md:rounded-l-4xl ">
+        <LoginForm />
+      </div>
+      </div>
+     
     </div>
   );
 };

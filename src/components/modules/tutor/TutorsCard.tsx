@@ -10,7 +10,7 @@ import tutorProfile from '../../../../public/tuturProfile.jpg';
 
 const TutorsCard = ({ tutor }: { tutor: IUser }) => {
   return (
-    <div className="bg-white dark:bg-gray-800 relative overflow-hidden shadow-md group rounded-xl p-6 transition-all duration-300 hover:shadow-lg mb-6">
+    <div className="bg-white dark:bg-gray-800 relative overflow-hidden group rounded-xl p-6 transition-all duration-300 hover:shadow-lg mb-6">
       <div className="flex flex-col lg:flex-row items-center gap-6">
         
         <div className="lg:w-1/4 relative">

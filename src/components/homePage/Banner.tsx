@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import banner from "../../app/assets/banner.png"; // Adjust the path as necessary
 
 const Banner = () => {
   const [subject, setSubject] = useState("");
@@ -60,11 +61,10 @@ const Banner = () => {
         {/* Image Section */}
         <div className="flex-1 relative w-full h-64 md:h-96">
           <Image
-            src="https://i.ibb.co/DxC7QQx/banner1.png"
+            src={banner}
             alt="Banner"
             layout="fill"
             objectFit="cover"
-            className="rounded-xl shadow-xl"
             priority
           />
         </div>

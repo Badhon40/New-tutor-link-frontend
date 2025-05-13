@@ -95,7 +95,8 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className=" md:w-[550px] w-[350px] shadow-[0px_0px_20px_theme(colors.blue.600)]  overflow-hidden rounded-lg border border-[#066ccb] p-4 bg-gray-100 dark:border-zinc-700 dark:bg-zinc-900">
+    <div className="min-h-screen bg-gradient-to-r  flex items-center justify-center px-4 py-3">
+      <div className="md:w-[450px] w-[350px] shadow-[0px_0px_20px_theme(colors.blue.600)]  overflow-hidden rounded-lg border border-[#066ccb] py-4 px-8 bg-gray-100 dark:border-zinc-700 dark:bg-zinc-900">
       <div className="flex select-none gap-2 border-b p-2.5 *:flex-1 *:rounded-md *:border *:p-2 *:text-center  *:shadow-inner *:outline-none dark:border-[#066ccb]  *:dark:border-[#066ccb]">
         <button
           onClick={() => setSignUp(false)}
@@ -128,9 +129,8 @@ const RegisterForm = () => {
               onSubmit={form.handleSubmit(onSubmit)}
               className={`${
                 signUp ? "h-full duration-300" : "invisible h-0 opacity-0"
-              } space-y-3 sm:space-y-3`}
+              } `}
             >
-              <div className=" md:flex flex-wrap justify-between ">
                 <FormField
                   control={form.control}
                   name="name"
@@ -169,9 +169,6 @@ const RegisterForm = () => {
                     </FormItem>
                   )}
                 />
-              </div>
-
-              <div className="md:flex flex-wrap justify-between">
                 <FormField
                   // control={form.control}
                   name="subjects"
@@ -210,7 +207,6 @@ const RegisterForm = () => {
                     </FormItem>
                   )}
                 />
-              </div>
 
               <div className=" ">
                 <FormField
@@ -355,7 +351,7 @@ const RegisterForm = () => {
 
               <Button
                 type="submit"
-                className=" w-full bg-[#066ccb] hover:bg-blue-600/40 hover:text-[#066ccb] text-lg hover:border-[#066ccb]"
+                className="my-4 w-full bg-[#066ccb] hover:bg-blue-600/40 hover:text-[#066ccb] text-lg hover:border-[#066ccb]"
                 disabled={uploading}
               >
                 {isSubmitting ? "Registering...." : "Register"}
@@ -490,7 +486,7 @@ const RegisterForm = () => {
 
               <Button
                 type="submit"
-                className=" w-full bg-[#066ccb] hover:bg-blue-600/40 hover:text-[#066ccb] text-lg hover:border-[#066ccb]"
+                className=" w-full my-4 bg-[#066ccb] hover:bg-blue-600/40 hover:text-[#066ccb] text-lg hover:border-[#066ccb]"
                 disabled={uploading}
               >
                 {isSubmitting ? "Registering...." : "Register"}
@@ -518,6 +514,7 @@ const RegisterForm = () => {
         </p>
       </div>
     </div>
+      </div>
   );
 };
 
