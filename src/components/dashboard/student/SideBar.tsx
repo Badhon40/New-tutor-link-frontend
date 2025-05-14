@@ -26,7 +26,7 @@ export default function SidebarWrapper() {
     <>
       {/* Mobile Toggle Button */}
       <button
-        className="lg:hidden fixed top-4 left-4 z-50 bg-white dark:text-gray-900 p-2 rounded shadow"
+        className="lg:hidden fixed top-4 right-4 z-50 bg-white dark:text-gray-900 p-2 rounded shadow"
         onClick={toggleSidebar}
       >
         {isOpen ? <X size={24} /> : <Menu size={24} />}

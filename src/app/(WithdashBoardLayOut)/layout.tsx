@@ -18,7 +18,7 @@ const Dashboardlayout = ({ children }: { children: React.ReactNode }) => {
         {/* Main Content Area */}
         <main className="flex-1 pt-8 md:pt-24 p-8 pb-10 ">
           {/* Add padding inside the children area */}
-          <div className="  rounded-lg shadow">
+          <div className="rounded-lg shadow mt-20">
             {children}
           </div>
         </main>

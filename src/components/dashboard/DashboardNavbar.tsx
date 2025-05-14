@@ -28,7 +28,8 @@ const DashboardNavbar = () => {
   return (
     <nav className="fixed top-0 left-0 lg:left-64 right-0 z-30 h-16 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-4 md:px-8 shadow-sm">
       {/* Welcome Message */}
-      <div className="hidden sm:block text-sm sm:text-lg font-semibold text-blue-600 dark:text-white truncate">
+      <div className="flex justify-between items-center w-full">
+      <div className="hidden lg:block text-sm sm:text-lg font-semibold text-blue-600 dark:text-white truncate">
         Hi {user?.name}, Welcome to your Dashboard
       </div>
 
@@ -36,7 +37,7 @@ const DashboardNavbar = () => {
       {user && (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="focus:outline-none">
+            <button className="focus:outline-none rignt-0">
               <Image
                 src={"https://i.ibb.co/Dc78Zt5/avatar-1299805-1280.png"}
                 alt="User Avatar"
@@ -84,6 +85,7 @@ const DashboardNavbar = () => {
           </DropdownMenuContent>
         </DropdownMenu>
       )}
+      </div>
     </nav>
   );
 };
